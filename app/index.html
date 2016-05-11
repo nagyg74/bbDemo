@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>BookingBug Services Demo</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="js/lib/angular.min.js" type="text/javascript"></script>
+  <script src="js/lib/angular-resource.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="bbDemo" ng-controller="companyCtrl">
+<div class="container">
+  <div class="row">
+    <div ng-if="companyError" class="alert alert-warning alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span></button>
+      <strong>Sorry!</strong> There is no Company with this id.
+    </div>
+    <div ng-if="!companyError" class=" page-header">
+      <h1>{{companyName}}</h1>
+      <h4>{{companyDesc}}</h4>
+    </div>
+  </div>
+  <div ng-if="!companyError" class="services row" ng-controller="servicesCtrl">
+    <div ng-if="serviceError" class="alert alert-warning alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">×</span></button>
+      <strong>Sorry!</strong> No services found.
+    </div>
+    <div ng-if="!serviceError" class="service col-md-4" ng-repeat="service in services">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><span class="badge">{{$index + 1}}</span> {{service.name}}</h3>
+        </div>
+        <div class="panel-body">
+          {{service.description}}
+        </div>
+        <div class="panel-footer">
+          <div class="prices" ng-repeat="price in service.prices">
+            <span class="glyphicon glyphicon-gbp" aria-hidden="true"></span> {{price}} - {{service.durations[$index]}} {{service.duration_unit}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js" type="text/javascript"></script>
+<script src="js/controllers.js" type="text/javascript"></script>
+<script src="js/services.js" type="text/javascript"></script>
+</body>
+</html>
